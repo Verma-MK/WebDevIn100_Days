@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduGame Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>EduGame Hub</span>
+            </div>
+            <nav class="nav">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="settings-btn" id="settingsBtn" title="Settings">
+                    <i class="fas fa-cog"></i>
+                </button>
+                <button class="profile-btn" id="profileBtn" title="Profile">
+                    <i class="fas fa-user"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="dashboard" id="dashboard">
+            <div class="container">
+                <div class="welcome-section">
+                    <h1>Welcome to EduGame Hub!</h1>
+                    <p>Choose a subject and start your learning adventure</p>
+                    <div class="stats-overview">
+                        <div class="stat-card">
+                            <i class="fas fa-trophy"></i>
+                            <div>
+                                <span class="stat-number" id="totalScore">0</span>
+                                <span class="stat-label">Total Score</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-medal"></i>
+                            <div>
+                                <span class="stat-number" id="totalBadges">0</span>
+                                <span class="stat-label">Badges</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-fire"></i>
+                            <div>
+                                <span class="stat-number" id="streak">0</span>
+                                <span class="stat-label">Day Streak</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subjects-grid">
+                    <div class="subject-card" data-subject="math">
+                        <div class="card-icon math">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h3>Mathematics</h3>
+                        <p>Test your mathematical skills with timed quizzes</p>
+                        <div class="card-stats">
+                            <span class="best-score">Best: <span id="mathBest">0</span></span>
+                            <span class="games-played">Played: <span id="mathPlayed">0</span></span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="play-btn primary">Play Now</button>
+                            <button class="stats-btn" data-subject="math" title="View Statistics">
+                                <i class="fas fa-chart-bar"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="subject-card" data-subject="science">
+                        <div class="card-icon science">
+                            <i class="fas fa-atom"></i>
+                        </div>
+                        <h3>Science</h3>
+                        <p>Drag and drop to match scientific concepts</p>
+                        <div class="card-stats">
+                            <span class="best-score">Best: <span id="scienceBest">0</span></span>
+                            <span class="games-played">Played: <span id="sciencePlayed">0</span></span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="play-btn primary">Play Now</button>
+                            <button class="stats-btn" data-subject="math" title="View Statistics">
+                                <i class="fas fa-chart-bar"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="subject-card" data-subject="english">
+                        <div class="card-icon english">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3>English</h3>
+                        <p>Word scramble and vocabulary challenges</p>
+                        <div class="card-stats">
+                            <span class="best-score">Best: <span id="englishBest">0</span></span>
+                            <span class="games-played">Played: <span id="englishPlayed">0</span></span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="play-btn primary">Play Now</button>
+                            <button class="stats-btn" data-subject="math" title="View Statistics">
+                                <i class="fas fa-chart-bar"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="subject-card" data-subject="trivia">
+                        <div class="card-icon trivia">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h3>General Knowledge</h3>
+                        <p>Test your knowledge across various topics</p>
+                        <div class="card-stats">
+                            <span class="best-score">Best: <span id="triviaBest">0</span></span>
+                            <span class="games-played">Played: <span id="triviaPlayed">0</span></span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="play-btn primary">Play Now</button>
+                            <button class="stats-btn" data-subject="math" title="View Statistics">
+                                <i class="fas fa-chart-bar"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="leaderboard-section">
+                    <h2>🏆 Leaderboard</h2>
+                    <div class="leaderboard" id="leaderboard">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game View -->
+        <section class="game-view" id="gameView" style="display: none;">
+            <div class="container">
+                <div class="game-header">
+                    <button class="back-btn" id="backBtn">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Dashboard
+                    </button>
+                    <div class="game-info">
+                        <h2 id="gameTitle">Game Title</h2>
+                        <div class="game-stats">
+                            <div class="timer">
+                                <i class="fas fa-clock"></i>
+                                <span id="timer">30</span>s
+                            </div>
+                            <div class="score">
+                                <i class="fas fa-star"></i>
+                                <span id="currentScore">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-content" id="gameContent">
+                </div>
+            </div>
+        </section>
+
+        <div class="modal" id="resultModal">
+            <div class="modal-content">
+                <div class="result-header">
+                    <h2 id="resultTitle">Game Complete!</h2>
+                    <button class="close-btn" id="closeModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="result-body">
+                    <div class="final-score">
+                        <i class="fas fa-trophy"></i>
+                        <span id="finalScore">0</span>
+                        <span>points</span>
+                    </div>
+                    <div class="result-stats">
+                        <div class="stat">
+                            <span class="label">Correct Answers:</span>
+                            <span id="correctAnswers">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Total Questions:</span>
+                            <span id="totalQuestions">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Accuracy:</span>
+                            <span id="accuracy">0%</span>
+                        </div>
+                    </div>
+                    <div class="badges-earned" id="badgesEarned">
+
+                    </div>
+                    <div class="result-actions">
+                        <button class="btn secondary" id="playAgainBtn">Play Again</button>
+                        <button class="btn primary" id="backToDashboardBtn">Dashboard</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="profileModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Profile & Achievements</h2>
+                    <button class="close-btn" id="closeProfile">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="profile-stats">
+                        <div class="stat-grid">
+                            <div class="profile-stat">
+                                <i class="fas fa-gamepad"></i>
+                                <span class="number" id="totalGamesPlayed">0</span>
+                                <span class="label">Games Played</span>
+                            </div>
+                            <div class="profile-stat">
+                                <i class="fas fa-percentage"></i>
+                                <span class="number" id="averageAccuracy">0%</span>
+                                <span class="label">Avg Accuracy</span>
+                            </div>
+                            <div class="profile-stat">
+                                <i class="fas fa-clock"></i>
+                                <span class="number" id="totalTimePlayed">0</span>
+                                <span class="label">Minutes Played</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="badges-collection">
+                        <h3>🏅 Your Badges</h3>
+                        <div class="badges-grid" id="badgesGrid">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="settingsModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>⚙️ Settings</h2>
+                    <button class="close-btn" id="closeSettings">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="settings-grid">
+                        <div class="setting-group">
+                            <h3>🔊 Audio</h3>
+                            <div class="setting-item">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="soundToggle" checked>
+                                    <span class="slider"></span>
+                                </label>
+                                <span class="setting-label">Sound Effects</span>
+                            </div>
+                        </div>
+
+                        <div class="setting-group">
+                            <h3>🎨 Appearance</h3>
+                            <div class="setting-item">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="animationsToggle" checked>
+                                    <span class="slider"></span>
+                                </label>
+                                <span class="setting-label">Animations</span>
+                            </div>
+                        </div>
+
+                        <div class="setting-group">
+                            <h3>🎮 Gameplay</h3>
+                            <div class="setting-item">
+                                <label for="difficultySelect">Default Difficulty:</label>
+                                <select id="difficultySelect" class="setting-select">
+                                    <option value="easy">Easy</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="hard">Hard</option>
+                                    <option value="mixed">Mixed</option>
+                                </select>
+                            </div>
+                            <div class="setting-item">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="keyboardHintsToggle" checked>
+                                    <span class="slider"></span>
+                                </label>
+                                <span class="setting-label">Show Keyboard Shortcuts</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-actions">
+                        <button class="btn secondary" id="resetSettingsBtn">Reset to Default</button>
+                        <button class="btn primary" id="saveSettingsBtn">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="statisticsModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>📊 Game Statistics</h2>
+                    <button class="close-btn" id="closeStatistics">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="stats-tabs">
+                        <button class="tab-btn active" data-tab="overview">Overview</button>
+                        <button class="tab-btn" data-tab="subjects">By Subject</button>
+                        <button class="tab-btn" data-tab="progress">Progress</button>
+                    </div>
+
+                    <div class="tab-content active" id="overviewTab">
+                        <div class="stats-cards">
+                            <div class="stat-card-large">
+                                <div class="stat-icon">🏆</div>
+                                <div class="stat-info">
+                                    <span class="stat-number" id="totalScoreStats">0</span>
+                                    <span class="stat-label">Total Score</span>
+                                </div>
+                            </div>
+                            <div class="stat-card-large">
+                                <div class="stat-icon">🎯</div>
+                                <div class="stat-info">
+                                    <span class="stat-number" id="accuracyStats">0%</span>
+                                    <span class="stat-label">Overall Accuracy</span>
+                                </div>
+                            </div>
+                            <div class="stat-card-large">
+                                <div class="stat-icon">⏱️</div>
+                                <div class="stat-info">
+                                    <span class="stat-number" id="timePlayedStats">0</span>
+                                    <span class="stat-label">Minutes Played</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="subjectsTab">
+                        <div id="subjectStats"></div>
+                    </div>
+
+                    <div class="tab-content" id="progressTab">
+                        <div id="progressChart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="loading" id="loading" style="display: none;">
+        <div class="spinner"></div>
+        <p>Loading game...</p>
+    </div>
+
+    <script src="data/questions.js"></script>
+    <script src="utils/storage.js"></script>
+    <script src="utils/badges.js"></script>
+    <script src="games/math-quiz.js"></script>
+    <script src="games/science-puzzle.js"></script>
+    <script src="games/word-game.js"></script>
+    <script src="games/trivia-game.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
